@@ -172,10 +172,10 @@ export default function BlogsPage() {
                 </div>
                 <CardHeader>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                    {post.categories?.map((category, index) => (
+                    {post.categories?.map((category, i) => (
                       <span key={category.id}>
                         {category.title}
-                        {index < (post.categories?.length || 0) - 1 && ", "}
+                        {i < (post.categories?.length || 0) - 1 && ", "}
                       </span>
                     ))}
                   </div>

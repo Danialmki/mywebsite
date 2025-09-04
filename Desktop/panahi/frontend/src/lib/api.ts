@@ -33,7 +33,7 @@ export interface BlogPost {
   id: string;
   title: string;
   slug: string;
-  content: any; // Rich text content from Lexical editor
+  content: unknown; // Rich text content from Lexical editor
   heroImage?: {
     id: string;
     url: string;
@@ -265,7 +265,7 @@ export async function fetchCoursesByLevel(
         ? "/courses"
         : `/courses?level=${encodeURIComponent(level)}`;
     return await apiRequest<Course[]>(endpoint);
-  } catch (error) {
+  } catch {
     // Fallback to mock data
     if (level === "all") {
       return mockCourses;
@@ -282,7 +282,7 @@ export async function fetchCourseById(id: string): Promise<Course | null> {
   try {
     const courses = await apiRequest<Course[]>(`/courses/${id}`);
     return courses[0] || null;
-  } catch (error) {
+  } catch {
     // Fallback to mock data
     const course = mockCourses.find((c) => c.id.toString() === id);
     return course || null;
@@ -295,7 +295,7 @@ export async function fetchBlogPosts(category?: string): Promise<BlogPost[]> {
       ? `/blogs?category=${encodeURIComponent(category)}`
       : "/blogs";
     return await apiRequest<BlogPost[]>(endpoint);
-  } catch (error) {
+  } catch {
     // Fallback to mock data
     if (category && category !== 'all') {
       return mockBlogPosts.filter(
@@ -310,7 +310,7 @@ export async function fetchBlogPostById(id: string): Promise<BlogPost | null> {
   try {
     const blogs = await apiRequest<BlogPost[]>(`/blogs/${id}`);
     return blogs[0] || null;
-  } catch (error) {
+  } catch {
     // Fallback to mock data
     const blog = mockBlogPosts.find((b) => b.id === id);
     return blog || null;
@@ -355,8 +355,8 @@ export async function getAllPosts(
       prevPage: data.prevPage || undefined,
       nextPage: data.nextPage || undefined,
     };
-  } catch (error) {
-    console.error('Error fetching posts:', error);
+  } catch {
+    console.error('Error fetching posts');
     return {
       docs: [],
       totalDocs: 0,

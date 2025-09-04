@@ -1,0 +1,25 @@
+{
+  "name": "panahi-academy",
+  "version": "1.0.0",
+  "description": "Panahi Academy - Full-stack application with Payload CMS backend and Next.js frontend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"pnpm run dev:backend\" \"pnpm run dev:frontend\"",
+    "dev:backend": "cd acd-payload && pnpm dev --port 4000",
+    "dev:frontend": "cd frontend && pnpm dev --port 3000",
+    "build": "pnpm run build:backend && pnpm run build:frontend",
+    "build:backend": "cd acd-payload && pnpm build",
+    "build:frontend": "cd frontend && pnpm build",
+    "start": "concurrently \"pnpm run start:backend\" \"pnpm run start:frontend\"",
+    "start:backend": "cd acd-payload && pnpm start --port 4000",
+    "start:frontend": "cd frontend && pnpm start --port 3000",
+    "install:all": "pnpm install && cd acd-payload && pnpm install && cd ../frontend && pnpm install",
+    "lint": "pnpm run lint:backend && pnpm run lint:frontend",
+    "lint:backend": "cd acd-payload && pnpm lint",
+    "lint:frontend": "cd frontend && pnpm lint"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
